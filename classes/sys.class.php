@@ -24,7 +24,7 @@ class IssueTracker {
 			$user = false;
 			return;
 		}
-		$query = $db->execute("SELECT * FROM `sessions`, `users` LEFT JOIN `departments` ON `dep_id`=`department` LEFT JOIN `groups` ON `gr_id`=`group` WHERE `uid`=`id` AND `session`='{$db->safe($_COOKIE['tracker_sid'])}'");
+		$query = $db->execute("SELECT *, (need_inactive_check AND last_active < NOW() - INTERVAL 1 HOUR) AS `need_check` FROM `sessions`, `users` LEFT JOIN `departments` ON `dep_id`=`department` LEFT JOIN `groups` ON `gr_id`=`group` WHERE `uid`=`id` AND `session`='{$db->safe($_COOKIE['tracker_sid'])}'");
 		if($db->num_rows($query) != 1) {
 			$user = false;
 			return;
@@ -40,6 +40,7 @@ class IssueTracker {
 		$sessionID = self::randString(128);
 		$db->execute("UPDATE `sessions` SET `session`='$sessionID', `valid_until`=NOW() WHERE `sid`='{$query['sid']}'");
 		setcookie("tracker_sid", $sessionID, time() + 3600 * 24 * 30, '/');
+		$_COOKIE['tracker_sid'] = $sessionID;
 	}
 
 	public static function SetData($key, $value) {

@@ -12,6 +12,7 @@ class User {
 	private $section_name;
 	private $register_date;
 	private $login_date;
+	private $need_check;
 	private $default_color;
 	public function __construct($search, $in = 'id') {
 		global $db;
@@ -29,6 +30,7 @@ class User {
 		$this->mail = $search['mail'];
 		$this->password = $search['password'];
 		$this->section = $search['department'];
+		$this->need_check = (isset($search['need_check']))? $search['need_check']: false;
 		$this->section_name = $search['dep_name'];
 		$this->register_date = $search['register_date'];
 		$this->login_date = strtotime($search['online_date']);
@@ -41,6 +43,9 @@ class User {
 	}
 	public function login() {
 		return $this->nickname;
+	}
+	public function need_relogin() {
+		return $this->need_check;
 	}
 	public function full_name() {
 		return $this->name;
