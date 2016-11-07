@@ -16,4 +16,4 @@ $main_page = 'dashboard';
 $page = (isset($_GET['page']))? $_GET['page']:"dashboard"; //Here is default page
 $lnk = explode('/', $page);
 $mode = (isset($lnk[0]))? $lnk[0]: $main_page;
-include (!$user)?(TRACKER_ROOT . "pages/login.php"):(($user->need_relogin())?(TRACKER_ROOT . "pages/relogin.php"):((file_exists(TRACKER_ROOT . "pages/$mode.php"))? (TRACKER_ROOT . "pages/$mode.php"): (TRACKER_ROOT . "pages/404.php")));
+include (!$user && $mode != 'api')?(TRACKER_ROOT . "pages/login.php"):(($mode != 'api' && $user->need_relogin())?(TRACKER_ROOT . "pages/relogin.php"):((file_exists(TRACKER_ROOT . "pages/$mode.php"))? (TRACKER_ROOT . "pages/$mode.php"): (TRACKER_ROOT . "pages/404.php")));

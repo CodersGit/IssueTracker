@@ -47,15 +47,15 @@
 		<!-- lockscreen credentials (contains the form) -->
 		<form class="lockscreen-credentials" method="post">
 			<div class="input-group">
-				<input name="password" type="password" class="form-control" placeholder="Пароль">
+				<input name="password" type="password" class="form-control" placeholder="Пароль" id="relogin-password">
 				<div class="input-group-btn">
-					<button class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+					<button type="button" class="btn relogin-btn"><i class="fa fa-arrow-right text-muted"></i></button>
 				</div>
 			</div>
 		</form><!-- /.lockscreen credentials -->
 
 	</div><!-- /.lockscreen-item -->
-	<div class="text-center text-red">
+	<div class="text-center text-red" id="relogin-message">
 		<?php echo $error ?>
 	</div>
 	<div class="help-block text-center">
@@ -65,7 +65,7 @@
 		<a href="login.html">Или залогиньтесь заново</a>
 	</div>
 	<div class="lockscreen-footer text-center">
-		Copyright &copy; 2015-<?php echo date("Y") ?> <b><a href="http://Блогкодера.рф" class="text-black">PolarWolf</a></b><br>
+		PolarFox Tracker Engine &copy; 2015-<?php echo date("Y") ?> <b><a href="http://блогкодера.рф" class="text-black">PolarWolf</a></b><br>
 		All rights reserved
 	</div>
 </div><!-- /.center -->
@@ -76,6 +76,8 @@
 <script src="/tpl/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="/tpl/style-plugins/iCheck/icheck.min.js"></script>
+<!-- Pace -->
+<script src="/tpl/style-plugins/pace/pace.js"></script>
 <script>
 	$(function () {
 		$('input').iCheck({
@@ -85,5 +87,6 @@
 		});
 	});
 </script>
+<script src="/tpl/js/pf-tools.js"></script>
 </body>
 </html>
