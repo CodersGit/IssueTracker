@@ -31,25 +31,25 @@
 	//Create the new tab
 	var tab_pane = $("<div />", {
 		"id": "control-sidebar-theme-demo-options-tab",
-		"class": "tab-pane active"
+		"class": "tab-pane"
 	});
 
 	//Create the tab button
-	var tab_button = $("<li />", {"class": "active"})
+	var tab_button = $("<li />")
 		.html("<a href='#control-sidebar-theme-demo-options-tab' data-toggle='tab'>"
 			+ "<i class='fa fa-wrench'></i>"
 			+ "</a>");
 
 	//Add the tab button to the right sidebar tabs
-	$("[href='#control-sidebar-home-tab']")
+	$("[href='#control-sidebar-settings-tab']")
 		.parent()
-		.before(tab_button);
+		.after(tab_button);
 
 	//Create the menu
 	var demo_settings = $("<div />");
 
 	//Layout options
-	demo_settings.append(
+/*	demo_settings.append(
 		"<h4 class='control-sidebar-heading'>"
 		+ "Layout Options"
 		+ "</h4>"
@@ -102,6 +102,7 @@
 		+ "<p>Toggle between dark and light skins for the right sidebar</p>"
 		+ "</div>"
 	);
+*/
 	var skins_list = $("<ul />", {"class": 'list-unstyled clearfix'});
 
   //Dark sidebar skins
@@ -204,7 +205,7 @@
                   + "<p class='text-center no-margin' style='font-size: 12px;'>Желтый (светлый)</p>");
   skins_list.append(skin_yellow_light);
 
-	demo_settings.append("<h4 class='control-sidebar-heading'>Skins</h4>");
+	demo_settings.append("<h4 class='control-sidebar-heading'>Скины:</h4>");
 	demo_settings.append(skins_list);
 
 	tab_pane.append(demo_settings);
@@ -238,10 +239,10 @@
 	 * @returns Boolean false to prevent link's default action
 	 */
 	function change_skin(cls) {
+		$.ajax({url: '/api/setcolor/'+cls});
 		$.each(my_skins, function (i) {
 			$("body").removeClass(my_skins[i]);
 		});
-
 		$("body").addClass(cls);
 		store('skin', cls);
 		return false;
@@ -322,7 +323,7 @@
 		});
 
 		$("[data-enable='expandOnHover']").on('click', function () {
-			$(this).attr('disabled', true);
+//			$(this).attr('disabled', true);
 			AdminLTE.pushMenu.expandOnHover();
 			if (!$('body').hasClass('sidebar-collapse'))
 				$("[data-layout='sidebar-collapse']").click();
@@ -334,8 +335,6 @@
 		}
 		if ($('body').hasClass('layout-boxed')) {
 			$("[data-layout='layout-boxed']").attr('checked', 'checked');
-			AdminLTE.controlSidebar._fix($(".control-sidebar-bg"));
-			AdminLTE.controlSidebar._fix($(".control-sidebar"));
 		}
 		if ($('body').hasClass('sidebar-collapse')) {
 			$("[data-layout='sidebar-collapse']").attr('checked', 'checked');

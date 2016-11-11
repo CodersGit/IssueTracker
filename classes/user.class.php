@@ -68,7 +68,16 @@ class User {
 		$this->login_date = time();
 	}
 	public function get_default_color () {
-		return IssueTracker::$InterfaceColors[($this->default_color < count(IssueTracker::$InterfaceColors))? $this->default_color : 0];
+		return IssueTracker::$InterfaceColors[($this->default_color < count(IssueTracker::$InterfaceColors) and $this->default_color >= 0)? $this->default_color : 0];
+	}
+	public function update_default_color ($new_color_name) {
+		global $db;
+		if (!in_array($new_color_name, IssueTracker::$InterfaceColors))
+			return;
+		$new_color = array_search ($new_color_name, IssueTracker::$InterfaceColors);
+		$query = $db->execute("UPDATE `users` SET `default_color`='{$db->safe($new_color)}' WHERE `id`='{$db->safe($this->id)}'") or die($db->error());
+		if ($query)
+			$this->default_color = $new_color;
 	}
 	public function check_pass($password) {
 		return hash('sha256', $password) == $this->password;

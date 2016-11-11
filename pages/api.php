@@ -43,6 +43,16 @@ switch ($lnk[1]) {
 			$message = 'Не все передано';
 		}
 		break;
+	case 'setcolor':
+		if (!isset($lnk[2]) or !$user or $user->need_relogin()) {
+			$code = 1;
+			$message = 'Не все передано или Вы не вошли';
+			break;
+		}
+		$user->update_default_color(str_replace('skin-', '', $lnk[2]));
+		$code = 0;
+		$message = 'success';
+		break;
 	default:
 		include TRACKER_BASE . 'pages/404.php';
 		break;
