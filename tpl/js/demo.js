@@ -244,7 +244,6 @@
 			$("body").removeClass(my_skins[i]);
 		});
 		$("body").addClass(cls);
-		store('skin', cls);
 		return false;
 	}
 
@@ -285,10 +284,6 @@
 	 * @returns void
 	 */
 	function setup() {
-		var tmp = get('skin');
-		if (tmp && $.inArray(tmp, my_skins))
-			change_skin(tmp);
-
 		//Add the change skin listener
 		$("[data-skin]").on('click', function (e) {
 			if ($(this).hasClass('knob'))
