@@ -239,11 +239,16 @@
 	 * @returns Boolean false to prevent link's default action
 	 */
 	function change_skin(cls) {
-		$.ajax({url: '/api/setcolor/'+cls});
-		$.each(my_skins, function (i) {
-			$("body").removeClass(my_skins[i]);
+		Pace.ignore(function () {
+			$.ajax({url: '/api/setcolor/'+cls, success: function (result) {
+				if(result['code'] == 0) {
+					$.each(my_skins, function (i) {
+						$("body").removeClass(my_skins[i]);
+					});
+					$("body").addClass(cls);
+				}
+			},dataType: 'json'});
 		});
-		$("body").addClass(cls);
 		return false;
 	}
 
@@ -307,13 +312,18 @@
 
 		$("[data-sidebarskin='toggle']").on('click', function () {
 			var sidebar = $(".control-sidebar");
+			var sidebarFix = $(".control-sidebar-bg");
 			if (sidebar.hasClass("control-sidebar-dark")) {
 				sidebar.removeClass("control-sidebar-dark")
 				sidebar.addClass("control-sidebar-light")
+				sidebarFix.removeClass("control-sidebar-dark")
+				sidebarFix.addClass("control-sidebar-light")
 			}
 			else {
 				sidebar.removeClass("control-sidebar-light")
 				sidebar.addClass("control-sidebar-dark")
+				sidebarFix.removeClass("control-sidebar-light")
+				sidebarFix.addClass("control-sidebar-dark")
 			}
 		});
 

@@ -1,6 +1,7 @@
-
 // To make Pace works on Ajax calls
-$(document).ajaxStart(function() { Pace.restart(); });
+$(document).ajaxStart(function() {
+	Pace.restart();
+});
 $('.login-btn').click(function(){
 	$.ajax({type: 'POST',dataType: 'json',url: '/api/login',success: function(result){
 		if(result['code'] == 0)

@@ -53,6 +53,18 @@ switch ($lnk[1]) {
 		$code = 0;
 		$message = 'success';
 		break;
+	case 'chat':
+		if (!isset($lnk[2]) or !$user or $user->need_relogin()) {
+				$code = 1;
+			$message = 'Не все передано';
+		}
+		$db->execute("SELECT * FROM `chat`, `users` WHERE `ch_dep`='{$db->safe($lnk[2])}' AND `ch_author`=`id`");
+
+		break;
+	case 'notifications':
+		$db->execute("SELECT `not_id`, `not_type` FROM `notifications` WHERE `not_target`='{$db->safe($user->uid())}' AND `not_viewed`=`1`");
+
+		break;
 	default:
 		include TRACKER_BASE . 'pages/404.php';
 		break;
