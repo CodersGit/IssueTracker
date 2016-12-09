@@ -25,6 +25,14 @@ switch ($lnk[1]) {
 			$message = 'Вы не залогинены';
 		}
 		break;
+	case 'logout':
+		if ($user) {
+			User::Logout();
+		} else {
+			$code = 1;
+			$message = 'Вы не залогинены';
+		}
+		break;
 	case 'login':
 		if (isset($_POST['login']) and isset($_POST['password'])) {
 			$user = new User($_POST['login'], 'nickname');

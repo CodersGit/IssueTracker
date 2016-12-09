@@ -13,6 +13,14 @@ $('.login-btn').click(function(){
 	}, data: 'login='+$('#login-login').val()+'&password='+$('#login-password').val()+(($("#login-remember").is(':checked'))?'&remember=1':'')});
 	return false;
 });
+$('.btn-logout').click(function(){
+	$.ajax({type: 'GET',dataType: 'json',url: '/api/logout',success: function(result){
+			location.reload();
+	}, error: function(result, textStatus, errorThrown){
+		alert('Ошибка при создании запроса');
+	}});
+	return false;
+});
 $('.relogin-btn').click(function(){
 	$.ajax({type: 'POST',dataType: 'json',url: '/api/relogin',success: function(result){
 		if(result['code'] == 0)

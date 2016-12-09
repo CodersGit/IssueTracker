@@ -85,4 +85,11 @@ class User {
 	public function get_avatar() {
 		return (file_exists(TRACKER_ROOT . 'avatars/' . $this->id . '.png'))? ('/avatars/' . $this->id . '.png'):('/tpl/img/noavatar.png');
 	}
+	public static function Logout () {
+		global $user, $db;
+		if (!$user)
+			return;
+		$db->execute("DELETE FROM `sessions` WHERE `session`='{$db->safe($_COOKIE['tracker_sid'])}'");
+		setcookie("tracker_sid", '', time(), '/');
+	}
 }

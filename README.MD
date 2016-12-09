@@ -1,6 +1,6 @@
 # PolarWolf's Issue Tracker
 
- - **Author** : Sergey "PolarWolf" Zhirov (@codersgit)
+ - **Author** : Sergey "PolarWolf" Zhirov (@CodersGit)
  - **Version** : 0.1
  - **Website** : [БлогКодера.РФ](http://БлогКодера.РФ)
 

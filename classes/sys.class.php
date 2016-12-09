@@ -50,7 +50,9 @@ class IssueTracker {
 		$user = $tmp;
 		$user->update_online();
 		$sessionID = self::randString(128);
-		$db->execute("UPDATE `sessions` SET `session`='$sessionID', `valid_until`=NOW() WHERE `sid`='{$query['sid']}'");
+		$sid_unic = $db->execute("UPDATE `sessions` SET `session`='$sessionID', `valid_until`=NOW() WHERE `sid`='{$query['sid']}'");
+		if (!$sid_unic)
+			return;
 		setcookie("tracker_sid", $sessionID, time() + 3600 * 24 * 30, '/');
 		$_COOKIE['tracker_sid'] = $sessionID;
 	}
