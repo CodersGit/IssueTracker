@@ -83,7 +83,10 @@ class User {
 		return hash('sha256', $password) == $this->password;
 	}
 	public function get_avatar() {
-		return (file_exists(TRACKER_ROOT . 'avatars/' . $this->id . '.png'))? ('/avatars/' . $this->id . '.png'):('/tpl/img/noavatar.png');
+		return (self::GetAvatar($this->id));
+	}
+	public static function GetAvatar($id) {
+		return (file_exists(TRACKER_ROOT . 'avatars/' . $id . '.png'))? ('/avatars/' . $id . '.png'):('/tpl/img/noavatar.png');
 	}
 	public static function Logout () {
 		global $user, $db;

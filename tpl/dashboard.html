@@ -34,70 +34,24 @@
 									<th>ID</th>
 									<th width="50%">Название</th>
 									<th width="30%">Статус</th>
-									<th>Срок</th>
+									<th>Обновлен</th>
 								</tr>
 								</thead>
 								<tbody>
-								<tr>
-									<td><a href="/task/BG648">BG648</a></td>
-									<td>Исправить баг с подсказкой предмета</td>
-									<td>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-green" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">20% завершено</span>
-											</div>
-										</div>
-									</td>
-									<td>26 апреля 2021г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/BG684">BG684</a></td>
-									<td>Исправить баг с херотенью</td>
-									<td>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-green" style="width: 90%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">90% завершено</span>
-											</div>
-										</div>
-									</td>
-									<td>9 сентября 2021г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/EN864">EN864</a></td>
-									<td>Добавить поддержку высокого интеллекта</td>
-									<td>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-green" style="width: 10%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">10% завершено</span>
-											</div>
-										</div>
-									</td>
-									<td>14 марта 2017г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/BG648">EN468</a></td>
-									<td>Доделать сверхразумный ИИ</td>
-									<td>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-green" style="width: 33%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">33% завершено</span>
-											</div>
-										</div>
-									</td>
-									<td>26 апреля 2016г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/BG486">TS486</a></td>
-									<td>Собрать билд для первомайской демонстрации</td>
-									<td>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-green" style="width: 88%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">88% завершено</span>
-											</div>
-										</div>
-									</td>
-									<td>1 мая 2020г.</td>
-								</tr>
+									<?php foreach($old_tasks as $task) { ?>
+										<tr>
+											<td><a href="/task/<?php echo $task->get('id') ?>"><?php echo $task->get('tid') ?></a></td>
+											<td><?php echo $task->get('title') ?></td>
+											<td>
+												<div class="progress xs">
+													<div class="progress-bar progress-bar-green" style="width: <?php echo $task->get('progress') ?>%" role="progressbar" aria-valuenow="<?php echo $task->get('progress') ?>" aria-valuemin="0" aria-valuemax="100">
+													<span class="sr-only"><?php echo $task->get('progress') ?>% завершено</span>
+													</div>
+												</div>
+											</td>
+											<td><?php echo date('d M Y', strtotime($task->get('last_updated'))) ?></td>
+										</tr>
+									<?php } ?>
 								</tbody>
 							</table>
 						</div><!-- /.table-responsive -->
@@ -127,36 +81,14 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr>
-									<td><a href="/task/BG648">BG648</a></td>
-									<td>Исправить баг с подсказкой предмета</td>
-									<td>Николай Расторгуев</td>
-									<td>26 апреля 2021г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/BG684">BG684</a></td>
-									<td>Исправить баг с херотенью</td>
-									<td>Аркадий Паровозов</td>
-									<td>9 сентября 2021г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/EN864">EN864</a></td>
-									<td>Добавить поддержку высокого интеллекта</td>
-									<td>Василий Шаманхуев</td>
-									<td>14 марта 2017г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/BG648">EN468</a></td>
-									<td>Доделать сверхразумный ИИ</td>
-									<td>Мурзик Васильев</td>
-									<td>26 апреля 2016г.</td>
-								</tr>
-								<tr>
-									<td><a href="/task/BG486">TS486</a></td>
-									<td>Собрать билд для первомайской демонстрации</td>
-									<td>Сергей Жиров</td>
-									<td>1 мая 2020г.</td>
-								</tr>
+								<?php foreach($free_tasks as $task) { ?>
+									<tr>
+										<td><a href="/task/<?php echo $task->get('id') ?>"><?php echo $task->get('tid') ?></a></td>
+										<td><?php echo $task->get('title') ?></td>
+										<td><?php echo $task->get('author_name') ?></td>
+										<td><?php echo date('d M Y', strtotime($task->get('date'))) ?></td>
+									</tr>
+								<?php } ?>
 								</tbody>
 							</table>
 						</div><!-- /.table-responsive -->
@@ -293,6 +225,90 @@
 								</li><!-- End Contact Item -->
 								<li>
 									<a href="#">
+										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div><!-- /.contacts-list-info -->
+									</a>
+								</li><!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div><!-- /.contacts-list-info -->
+									</a>
+								</li><!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div><!-- /.contacts-list-info -->
+									</a>
+								</li><!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div><!-- /.contacts-list-info -->
+									</a>
+								</li><!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div><!-- /.contacts-list-info -->
+									</a>
+								</li><!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div><!-- /.contacts-list-info -->
+									</a>
+								</li><!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div><!-- /.contacts-list-info -->
+									</a>
+								</li><!-- End Contact Item -->
+								<li>
+									<a href="#">
 										<img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
 										<div class="contacts-list-info">
                                 <span class="contacts-list-name">
@@ -370,61 +386,14 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">Общий чат</h3>
 						<div class="box-tools pull-right">
-							<span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
+							<span data-toggle="tooltip" title="0 New Messages" class="badge bg-yellow" id="all_chat_new_notifier"></span>
 							<button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
 							<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 						</div>
 					</div><!-- /.box-header -->
 					<div class="box-body">
 						<!-- Conversations are loaded here -->
-						<div class="direct-chat-messages">
-							<!-- Message. Default to the left -->
-							<div class="direct-chat-msg">
-								<div class="direct-chat-info clearfix">
-									<span class="direct-chat-name pull-left">Alexander Pierce</span>
-									<span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-								</div><!-- /.direct-chat-info -->
-								<img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-								<div class="direct-chat-text">
-									Is this template really for free? That's unbelievable!
-								</div><!-- /.direct-chat-text -->
-							</div><!-- /.direct-chat-msg -->
-
-							<!-- Message to the right -->
-							<div class="direct-chat-msg right">
-								<div class="direct-chat-info clearfix">
-									<span class="direct-chat-name pull-right">Sarah Bullock</span>
-									<span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-								</div><!-- /.direct-chat-info -->
-								<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-								<div class="direct-chat-text">
-									You better believe it!
-								</div><!-- /.direct-chat-text -->
-							</div><!-- /.direct-chat-msg -->
-
-							<!-- Message. Default to the left -->
-							<div class="direct-chat-msg">
-								<div class="direct-chat-info clearfix">
-									<span class="direct-chat-name pull-left">Alexander Pierce</span>
-									<span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
-								</div><!-- /.direct-chat-info -->
-								<img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-								<div class="direct-chat-text">
-									Working with AdminLTE on a great new app! Wanna join?
-								</div><!-- /.direct-chat-text -->
-							</div><!-- /.direct-chat-msg -->
-
-							<!-- Message to the right -->
-							<div class="direct-chat-msg right">
-								<div class="direct-chat-info clearfix">
-									<span class="direct-chat-name pull-right">Sarah Bullock</span>
-									<span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
-								</div><!-- /.direct-chat-info -->
-								<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-								<div class="direct-chat-text">
-									I would love to.
-								</div><!-- /.direct-chat-text -->
-							</div><!-- /.direct-chat-msg -->
+						<div class="direct-chat-messages" id="all_chat_mes">
 
 						</div><!--/.direct-chat-messages-->
 
@@ -507,13 +476,8 @@
 						</div><!-- /.direct-chat-pane -->
 					</div><!-- /.box-body -->
 					<div class="box-footer">
-						<form action="#" method="post">
-							<div class="input-group">
-								<input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-success btn-flat">Send</button>
-                          </span>
-							</div>
+						<form onsubmit="sendAllChat(); return false;">
+							<textarea type="text" name="message" placeholder="Ниписать сообщение..." class="form-control" id="chat_reply" style="width: 100%"></textarea>
 						</form>
 					</div><!-- /.box-footer-->
 				</div><!--/.direct-chat -->
@@ -522,3 +486,12 @@
 	</section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 
+<script>
+	window.onload = function () {
+		updateAllChat();
+		$('#chat_reply').shiftenter({
+			hint: 'Shift+Enter для переноса строки',
+			submitFunc: sendAllChat
+		});
+	}
+</script>

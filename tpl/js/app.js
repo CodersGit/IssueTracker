@@ -177,10 +177,16 @@ $(function () {
 	}
 
 	//Add slimscroll to chat box
-	if (true && typeof $.fn.slimscroll != 'undefined') {
+	if (typeof $.fn.slimscroll != 'undefined') {
 		$(".direct-chat-messages").slimscroll({
 			height: "400px",
-			alwaysVisible: true,
+			alwaysVisible: false,
+			size: "5px",
+			start: 'bottom'
+		}).css("width", "100%");
+		$(".direct-chat-contacts>.contacts-list").slimscroll({
+			height: "400px",
+			alwaysVisible: false,
 			size: "5px"
 		}).css("width", "100%");
 	}

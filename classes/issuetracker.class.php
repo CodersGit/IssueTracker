@@ -1,7 +1,4 @@
 <?php
-define('TRACKER', '1');
-define('MCR_ROOT', dirname(__FILE__).'/');
-define('MCR_LANG', 'ru_RU');
 class IssueTracker {
 	private static $DATA;
 	public static $InterfaceColors = array("black","black-light","blue","blue-light","green","green-light","purple","purple-light","red","red-light","yellow","yellow-light");
@@ -49,12 +46,12 @@ class IssueTracker {
 		}
 		$user = $tmp;
 		$user->update_online();
-		$sessionID = self::randString(128);
-		$sid_unic = $db->execute("UPDATE `sessions` SET `session`='$sessionID', `valid_until`=NOW() WHERE `sid`='{$query['sid']}'");
-		if (!$sid_unic)
-			return;
-		setcookie("tracker_sid", $sessionID, time() + 3600 * 24 * 30, '/');
-		$_COOKIE['tracker_sid'] = $sessionID;
+//		$sessionID = self::randString(128);
+//		$sid_unic = $db->execute("UPDATE `sessions` SET `session`='$sessionID', `valid_until`=NOW() WHERE `sid`='{$query['sid']}'");
+//		if (!$sid_unic)
+//			return;
+//		setcookie("tracker_sid", $sessionID, time() + 3600 * 24 * 30, '/');
+//		$_COOKIE['tracker_sid'] = $sessionID;
 	}
 
 	public static function SetData($key, $value) {
@@ -98,7 +95,7 @@ class IssueTracker {
 
 	public static function GeneratePagination($page, $amount_by_page, $total_amount, $link) {
 		ob_start();
-		self::TakeTPL("pagination/pagin_start");
+		self::ShowTPL("pagination/pagin_start");
 		$pages_count = (int) ($total_amount / $amount_by_page + 1);
 		if ($page <= 5){
 			for ($p = 1; $p < $page; $p++){
@@ -131,7 +128,7 @@ class IssueTracker {
 			$l = $link . $pages_count;
 			include self::PathTPL("pagination/pagin_item_inactive");
 		}
-		self::TakeTPL("pagination/pagin_end");
+		self::ShowTPL("pagination/pagin_end");
 		return ob_get_clean();
 	}
 }

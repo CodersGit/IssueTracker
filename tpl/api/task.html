@@ -1,0 +1,14 @@
+<li><!-- Task item -->
+	<a href="/task/<?php echo $task->get('id') ?>">
+		<h3>
+			<b><?php echo $task->get('tid') ?></b> <?php echo $task->get('title') ?>
+			<small class="pull-right"><?php echo $task->get('progress') ?>%</small>
+		</h3>
+		<div class="progress xs">
+			<div class="progress-bar progress-bar-aqua" style="width: <?php echo $task->get('progress') ?>%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+				<span class="sr-only"><?php echo $task->get('progress') ?>% завершено</span>
+			</div>
+		</div>
+	</a>
+</li>
+<!-- end task item -->

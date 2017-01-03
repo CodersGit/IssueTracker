@@ -1,0 +1,11 @@
+<!-- Message to the right -->
+<div class="direct-chat-msg right">
+	<div class="direct-chat-info clearfix">
+		<span class="direct-chat-name pull-left"><?php echo $ch_message['name'] ?> @<?php echo $ch_message['nickname'] ?></span>
+		<span class="direct-chat-timestamp pull-right"><?php echo Date("H:i d.m.Y", strtotime($ch_message['ch_date'])) ?></span>
+	</div><!-- /.direct-chat-info -->
+	<img class="direct-chat-img" src="<?php echo User::GetAvatar($ch_message['id']) ?>" alt="message user image"><!-- /.direct-chat-img -->
+	<div class="direct-chat-text">
+		<?php echo nl2br(htmlspecialchars($ch_message['ch_message'])) ?>
+	</div><!-- /.direct-chat-text -->
+</div><!-- /.direct-chat-msg -->
