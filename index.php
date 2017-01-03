@@ -19,7 +19,7 @@ $page = (isset($_GET['page']))? $_GET['page']:"dashboard"; //Here is default pag
 $lnk = explode('/', $page);
 if ($user) {
 	IssueTracker::LoadClass('task');
-	$header_tasks = Task::GetAllWhere("`tsk_developer`='{$db->safe($user->uid())}' AND NOT `tsk_closed`", '`last_updated` ASC') or die ($db->error());
+	$header_tasks = Task::GetAllWhere("`tsk_developer`='{$db->safe($user->uid())}' AND NOT `tsk_closed`", '`last_updated` ASC');
 }
 $mode = (isset($lnk[0]))? $lnk[0]: $main_page;
 include (!$user && $mode != 'api')?(TRACKER_ROOT . "pages/login.php"):(($mode != 'api' && $user->need_relogin())?(TRACKER_ROOT . "pages/relogin.php"):((file_exists(TRACKER_ROOT . "pages/$mode.php"))? (TRACKER_ROOT . "pages/$mode.php"): (TRACKER_ROOT . "pages/404.php")));

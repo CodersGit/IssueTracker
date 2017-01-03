@@ -20,10 +20,10 @@ class Task extends Entity {
 	protected $project_name;
 	protected $progress;
 	protected $last_updated;
-	const Types = [1 => 'BG', 2 => 'EN', 3 => 'BB',];
+	public static $Types = [1 => 'BG', 2 => 'EN', 3 => 'BB',];
 	public function __construct(array $task) {
 		$this->id = $task['tsk_id'];
-		$this->tid = self::Types[$task['tsk_type']] . $this->id;
+		$this->tid = self::$Types[$task['tsk_type']] . $this->id;
 		$this->type = $task['tsk_type'];
 		$this->date = $task['tsk_date'];
 		$this->title = $task['tsk_title'];
